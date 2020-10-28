@@ -3,13 +3,13 @@ import { Client } from "../../Domain/client";
 import { ClientRepositoryInterface } from "../../Domain/Repository/Client/client.repository.interface";
 
 @Injectable()
-export class GetClientByIdUseCase {
+export class GetClientByNameUseCase {
 
   constructor(
     @Inject('ClientRepositoryInterface')
     private readonly clientRepository: ClientRepositoryInterface) {}
 
-  public async handle(clientId: string): Promise<Client> {
-    return await this.clientRepository.getById(clientId);
+  public async handle(name: string): Promise<Client> {
+    return await this.clientRepository.getByName(name);
   }
 }

@@ -1,7 +1,6 @@
 import { ClientRepositoryInterface } from "../../../Domain/Repository/Client/client.repository.interface";
 import { Client } from "../../../Domain/client";
 import { HttpService, Injectable } from "@nestjs/common";
-import { map } from "rxjs/operators";
 
 @Injectable()
 export class MockyClientRepository implements ClientRepositoryInterface {
@@ -13,8 +12,9 @@ export class MockyClientRepository implements ClientRepositoryInterface {
     return clientList.find((client: Client) => client.id == clientId);
   }
 
-  getByName(name: string): Client {
-    return undefined;
+  async getByName(name: string): Promise<Client> {
+    const clientList = await this.getCompleteClientList();
+    return clientList.find((client: Client) => client.name == name);
   }
 
 

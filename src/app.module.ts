@@ -3,6 +3,7 @@ import { ClientController } from "./Infrastructure/Controller/client.controller"
 import { PolicyController } from "./Infrastructure/Controller/policy.controller";
 import { GetClientByIdUseCase } from "./Application/Client/getClientById.useCase";
 import { MockyClientRepository } from "./Infrastructure/Repository/Client/mocky.client.repository";
+import { GetClientByNameUseCase } from "./Application/Client/getClientByName.useCase";
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { MockyClientRepository } from "./Infrastructure/Repository/Client/mocky.
   ],
   providers: [
     GetClientByIdUseCase,
+    GetClientByNameUseCase,
     {
       provide: 'ClientRepositoryInterface',
       useClass: MockyClientRepository
