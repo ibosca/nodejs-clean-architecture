@@ -1,20 +1,25 @@
 import { Controller, Get, Param, Query } from "@nestjs/common";
+import { GetClientByIdUseCase } from "../../Application/Client/getClientById.useCase";
+import { Client } from "../../Domain/client";
 
 @Controller('clients')
 export class ClientController {
 
+  constructor(private getClientByIdUseCase: GetClientByIdUseCase) {
+  }
+
   @Get(':clientId')
-  getUserById(@Param() params): string {
-    return `This endpoint will return a client for ${params.clientId} id`;
+  getClientById(@Param() params): Client {
+    return this.getClientByIdUseCase.handle(params.clientId);
   }
 
   @Get()
-  getUserByUsername(@Query('clientName') clientName: string): string {
+  getClientByUsername(@Query('clientName') clientName: string): string {
     return `This endpoint will return a client for ${clientName} username`;
   }
 
   @Get(':clientId/policies')
-  getPoliciesByUserId(@Param() params): string {
+  getPoliciesByClientId(@Param() params): string {
     return `This endpoint will return a policy list for ${params.clientId} client id`;
   }
 
