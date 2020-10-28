@@ -1,6 +1,5 @@
 import { Controller, Get, Param, Query } from "@nestjs/common";
 import { GetClientByIdUseCase } from "../../Application/Client/getClientById.useCase";
-import { Client } from "../../Domain/client";
 
 @Controller('clients')
 export class ClientController {
@@ -9,8 +8,9 @@ export class ClientController {
   }
 
   @Get(':clientId')
-  getClientById(@Param() params): Client {
-    return this.getClientByIdUseCase.handle(params.clientId);
+  async getClientById(@Param() params): Promise<any> {
+    const client = await this.getClientByIdUseCase.handle(params.clientId);
+    return client;
   }
 
   @Get()

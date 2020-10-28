@@ -1,16 +1,33 @@
 import { ClientRepositoryInterface } from "../../../Domain/Repository/Client/client.repository.interface";
 import { Client } from "../../../Domain/client";
-import { Injectable } from "@nestjs/common";
+import { HttpService, Injectable } from "@nestjs/common";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class MockyClientRepository implements ClientRepositoryInterface {
 
-  getById(clientId: string): Client {
-    return undefined;
+  constructor(private httpService: HttpService) {}
+
+  async getById(clientId: string): Promise<Client> {
+    const clientList = await this.getCompleteClientList();
+    return clientList.find((client: Client) => client.id == clientId);
   }
 
   getByName(name: string): Client {
     return undefined;
+  }
+
+
+  private async getCompleteClientList(): Promise<Client[]> {
+    const providerResponse = await this.fetchClientResponse();
+
+    return providerResponse.data.clients.map(clientData => {
+      return Client.fromJson(clientData);
+    });
+  }
+
+  private async fetchClientResponse(): Promise<any> {
+    return this.httpService.get('http://www.mocky.io/v2/5808862710000087232b75ac').toPromise();
   }
 
 }

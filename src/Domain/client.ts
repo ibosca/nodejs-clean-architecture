@@ -50,4 +50,13 @@ export class Client {
   public isRoleUser(): boolean {
     return this.role == this.ROLE_USER;
   }
+
+  public static fromJson(data: any): Client {
+    return new Client(
+      data.id,
+      data.name,
+      data.email,
+      data.role
+    );
+  }
 }

@@ -10,7 +10,7 @@ export class GetClientByIdUseCase {
     private readonly clientRepository: ClientRepositoryInterface) {}
 
 
-  public handle(clientId: string): Client {
-    return this.clientRepository.getById(clientId);
+  public async handle(clientId: string): Promise<Client> {
+    return await this.clientRepository.getById(clientId);
   }
 }
