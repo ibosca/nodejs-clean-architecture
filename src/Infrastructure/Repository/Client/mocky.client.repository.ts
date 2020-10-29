@@ -9,14 +9,13 @@ export class MockyClientRepository implements ClientRepositoryInterface {
 
   async getById(clientId: string): Promise<Client> {
     const clientList = await this.getCompleteClientList();
-    return clientList.find((client: Client) => client.id == clientId);
+    return clientList.find((client: Client) => client.getId() == clientId);
   }
 
   async getByName(name: string): Promise<Client> {
     const clientList = await this.getCompleteClientList();
-    return clientList.find((client: Client) => client.name == name);
+    return clientList.find((client: Client) => client.getName() == name);
   }
-
 
   private async getCompleteClientList(): Promise<Client[]> {
     const providerResponse = await this.fetchClientResponse();

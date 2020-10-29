@@ -9,12 +9,12 @@ export class MockyPolicyRepository implements PolicyRepositoryInterface {
 
   async getById(policyId: string): Promise<Policy> {
     const policyList = await this.getCompletePolicyList();
-    return policyList.find((policy: Policy) => policy.id == policyId);
+    return policyList.find((policy: Policy) => policy.getId() == policyId);
   }
 
   async getListByClientId(clientId: string): Promise<Policy[]> {
     const policyList = await this.getCompletePolicyList();
-    return policyList.filter((policy: Policy) => policy.clientId == clientId);
+    return policyList.filter((policy: Policy) => policy.getClientId() == clientId);
   }
 
 

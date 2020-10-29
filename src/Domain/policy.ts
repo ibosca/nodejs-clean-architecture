@@ -2,61 +2,20 @@ export class Policy {
 
 
   constructor(
-    private _id: string,
-    private _amountInsured: number,
-    private _email: string,
-    private _inceptionDate: Date,
-    private _installmentPayment: boolean,
-    private _clientId: string,
+    private id: string,
+    private amountInsured: number,
+    private email: string,
+    private inceptionDate: Date,
+    private installmentPayment: boolean,
+    private clientId: string,
   ) {}
 
-
-  get id(): string {
-    return this._id;
+  public getId(): string {
+    return this.id;
   }
 
-  set id(value: string) {
-    this._id = value;
-  }
-
-  get amountInsured(): number {
-    return this._amountInsured;
-  }
-
-  set amountInsured(value: number) {
-    this._amountInsured = value;
-  }
-
-  get email(): string {
-    return this._email;
-  }
-
-  set email(value: string) {
-    this._email = value;
-  }
-
-  get inceptionDate(): Date {
-    return this._inceptionDate;
-  }
-
-  set inceptionDate(value: Date) {
-    this._inceptionDate = value;
-  }
-
-  get installmentPayment(): boolean {
-    return this._installmentPayment;
-  }
-
-  set installmentPayment(value: boolean) {
-    this._installmentPayment = value;
-  }
-
-  get clientId(): string {
-    return this._clientId;
-  }
-
-  set clientId(value: string) {
-    this._clientId = value;
+  public getClientId(): string {
+    return this.clientId;
   }
 
   public static fromJson(data: any): Policy {
