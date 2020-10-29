@@ -6,6 +6,7 @@ import { MockyClientRepository } from "./Infrastructure/Repository/Client/mocky.
 import { GetClientByNameUseCase } from "./Application/Client/getClientByName.useCase";
 import { MockyPolicyRepository } from "./Infrastructure/Repository/Policy/mocky.policy.repository";
 import { GetPolicyListByClientIdUseCase } from "./Application/Policy/getPolicyListByClientId.useCase";
+import { GetPolicyByIdUseCase } from "./Application/Policy/getPolicyById.useCase";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { GetPolicyListByClientIdUseCase } from "./Application/Policy/getPolicyLi
     GetClientByIdUseCase,
     GetClientByNameUseCase,
     GetPolicyListByClientIdUseCase,
+    GetPolicyByIdUseCase,
     {
       provide: 'ClientRepositoryInterface',
       useClass: MockyClientRepository
