@@ -7,6 +7,11 @@ export class MockyPolicyRepository implements PolicyRepositoryInterface {
 
   constructor(private httpService: HttpService) {}
 
+  async getById(policyId: string): Promise<Policy> {
+    const policyList = await this.getCompletePolicyList();
+    return policyList.find((policy: Policy) => policy.id == policyId);
+  }
+
   async getListByClientId(clientId: string): Promise<Policy[]> {
     const policyList = await this.getCompletePolicyList();
     return policyList.filter((policy: Policy) => policy.clientId == clientId);
