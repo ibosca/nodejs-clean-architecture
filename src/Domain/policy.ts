@@ -28,4 +28,15 @@ export class Policy {
       data.clientId,
     );
   }
+
+  public jsonSerialize(): any {
+    return {
+      'id': this.id,
+      'amountInsured': this.amountInsured,
+      'email': this.email,
+      'inceptionDate': this.inceptionDate,
+      'installmentPayment': this.installmentPayment,
+      'clientId': this.clientId
+    }
+  }
 }
