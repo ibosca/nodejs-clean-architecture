@@ -13,7 +13,8 @@ export class GetClientByIdController {
   @Get('clients/:clientId')
   async getClientById(@Request() req): Promise<AppResponseDto> {
     const clientId = req.params.clientId;
-    const client = await this.getClientByIdUseCase.handle(clientId);
+    const userLoggedId = req.user.id;
+    const client = await this.getClientByIdUseCase.handle(clientId, userLoggedId);
     return this.buildResponse(client);
   }
 

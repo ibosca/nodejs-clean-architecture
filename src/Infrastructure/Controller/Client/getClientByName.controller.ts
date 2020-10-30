@@ -13,8 +13,9 @@ export class GetClientByNameController {
   @Get('/clients')
   async getClientByUsername(@Request() req): Promise<AppResponseDto> {
     const clientName = req.query.name;
+    const userLoggedId = req.user.id;
     this.guardValidateRequestData(clientName);
-    const client = await this.getClientByNameUseCase.handle(clientName);
+    const client = await this.getClientByNameUseCase.handle(clientName, userLoggedId);
     return this.buildResponse(client);
   }
 

@@ -9,7 +9,27 @@ export class GetClientByNameUseCase {
     @Inject('ClientRepositoryInterface')
     private readonly clientRepository: ClientRepositoryInterface) {}
 
-  public async handle(name: string): Promise<Client> {
+  public async handle(name: string, userLoggedId: string): Promise<Client> {
+    const userLogged = await this.clientRepository.getById(userLoggedId);
+
+    if (!this.hasPermission(userLogged)) {
+      throw new AccessDeniedError();
+    }
+
     return await this.clientRepository.getByName(name);
   }
+
+  private hasPermission(userLogged: Client): boolean
+  {
+    if (userLogged.isRoleUser()) {
+      return true;
+    }
+
+    if (userLogged.isRoleAdmin()) {
+      return true;
+    }
+
+    return false;
+  }
+
 }

@@ -13,7 +13,8 @@ export class GetPolicyListByClientIdController {
   @Get('clients/:clientId/policies')
   async getPoliciesByClientId(@Request() req): Promise<AppResponseDto> {
     const clientId = req.params.clientId;
-    const policyList = await this.getPolicyListByClientId.handle(clientId);
+    const userLoggedId = req.user.id;
+    const policyList = await this.getPolicyListByClientId.handle(clientId, userLoggedId);
     return this.buildResponse(policyList)
   }
 
