@@ -11,9 +11,11 @@ import { GetPolicyListByClientIdController } from "./Infrastructure/Controller/P
 import { GetPolicyByIdController } from "./Infrastructure/Controller/Policy/getPolicyById.controller";
 import { GetClientByEmailUseCase } from "./Application/Client/getClientByEmail.useCase";
 import { ValidateUserByBasicAuthUseCase } from "./Application/Auth/validateUserByBasicAuth.useCase";
-import { BasicAuthController, jwtConstants } from "./Infrastructure/Controller/Auth/basicAuth.controller";
+import { BasicAuthController } from "./Infrastructure/Controller/Auth/basicAuth.controller";
 import { LocalStrategyPassportAuth } from "./Infrastructure/Auth/localStrategy.passport.auth";
-import { JwtModule, JwtService } from "@nestjs/jwt";
+import { JwtModule } from "@nestjs/jwt";
+import { jwtConstants, PassportAuthRepository } from "./Infrastructure/Repository/Auth/passport.auth.repository";
+import { IssueTokenUseCase } from "./Application/Auth/issueToken.useCase";
 
 @Module({
   imports: [
@@ -37,6 +39,7 @@ import { JwtModule, JwtService } from "@nestjs/jwt";
     GetPolicyByIdUseCase,
     GetClientByEmailUseCase,
     ValidateUserByBasicAuthUseCase,
+    IssueTokenUseCase,
     {
       provide: 'ClientRepositoryInterface',
       useClass: MockyClientRepository
@@ -44,6 +47,10 @@ import { JwtModule, JwtService } from "@nestjs/jwt";
     {
       provide: 'PolicyRepositoryInterface',
       useClass: MockyPolicyRepository
+    },
+    {
+      provide: 'AuthRepositoryInterface',
+      useClass: PassportAuthRepository
     },
     LocalStrategyPassportAuth,
   ],
