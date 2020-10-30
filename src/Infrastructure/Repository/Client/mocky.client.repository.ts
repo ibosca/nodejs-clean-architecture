@@ -17,6 +17,11 @@ export class MockyClientRepository implements ClientRepositoryInterface {
     return clientList.find((client: Client) => client.getName() == name);
   }
 
+  async getByEmail(email: string): Promise<Client> {
+    const clientList = await this.getCompleteClientList();
+    return clientList.find((client: Client) => client.getEmail() == email);
+  }
+
   private async getCompleteClientList(): Promise<Client[]> {
     const providerResponse = await this.fetchClientResponse();
 

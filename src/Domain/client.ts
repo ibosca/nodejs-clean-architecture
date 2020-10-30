@@ -18,12 +18,20 @@ export class Client {
     return this.name;
   }
 
+  public getEmail(): string {
+    return this.email;
+  }
+
   public isRoleAdmin(): boolean {
     return this.role == this.ROLE_ADMIN;
   }
 
   public isRoleUser(): boolean {
     return this.role == this.ROLE_USER;
+  }
+
+  public getPassword(): string {
+    return 'I<3Pizza!'
   }
 
   public static fromJson(data: any): Client {

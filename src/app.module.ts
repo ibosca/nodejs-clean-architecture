@@ -9,6 +9,10 @@ import { GetClientByIdController } from "./Infrastructure/Controller/Client/getC
 import { GetClientByNameController } from "./Infrastructure/Controller/Client/getClientByName.controller";
 import { GetPolicyListByClientIdController } from "./Infrastructure/Controller/Policy/getPolicyListByClientId.controller";
 import { GetPolicyByIdController } from "./Infrastructure/Controller/Policy/getPolicyById.controller";
+import { GetClientByEmailUseCase } from "./Application/Client/getClientByEmail.useCase";
+import { ValidateUserByBasicAuthUseCase } from "./Application/Auth/validateUserByBasicAuth.useCase";
+import { BasicAuthController } from "./Infrastructure/Controller/Auth/basicAuth.controller";
+import { LocalStrategyPassportAuth } from "./Infrastructure/Auth/localStrategy.passport.auth";
 
 @Module({
   imports: [
@@ -18,13 +22,16 @@ import { GetPolicyByIdController } from "./Infrastructure/Controller/Policy/getP
     GetClientByIdController,
     GetClientByNameController,
     GetPolicyListByClientIdController,
-    GetPolicyByIdController
+    GetPolicyByIdController,
+    BasicAuthController
   ],
   providers: [
     GetClientByIdUseCase,
     GetClientByNameUseCase,
     GetPolicyListByClientIdUseCase,
     GetPolicyByIdUseCase,
+    GetClientByEmailUseCase,
+    ValidateUserByBasicAuthUseCase,
     {
       provide: 'ClientRepositoryInterface',
       useClass: MockyClientRepository
@@ -32,7 +39,8 @@ import { GetPolicyByIdController } from "./Infrastructure/Controller/Policy/getP
     {
       provide: 'PolicyRepositoryInterface',
       useClass: MockyPolicyRepository
-    }
+    },
+    LocalStrategyPassportAuth
   ],
 })
 export class AppModule {}
