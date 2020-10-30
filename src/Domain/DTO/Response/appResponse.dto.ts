@@ -17,4 +17,9 @@ export class AppResponseDto {
     const meta = new MetadataDto(200, true);
     return new AppResponseDto(meta, data);
   }
+
+  public static created(data: any): AppResponseDto {
+    const meta = new MetadataDto(201, true);
+    return new AppResponseDto(meta, data);
+  }
 }

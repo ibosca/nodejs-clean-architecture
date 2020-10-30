@@ -22,6 +22,10 @@ export class Client {
     return this.email;
   }
 
+  public getRole(): string {
+    return this.role;
+  }
+
   public isRoleAdmin(): boolean {
     return this.role == this.ROLE_ADMIN;
   }
