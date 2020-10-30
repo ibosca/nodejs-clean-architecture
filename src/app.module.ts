@@ -16,6 +16,7 @@ import { LocalStrategyPassportAuth } from "./Infrastructure/Auth/localStrategy.p
 import { JwtModule } from "@nestjs/jwt";
 import { jwtConstants, PassportAuthRepository } from "./Infrastructure/Repository/Auth/passport.auth.repository";
 import { IssueTokenUseCase } from "./Application/Auth/issueToken.useCase";
+import { JwtStrategyPassportAuth } from "./Infrastructure/Auth/jwtStrategy.passport.auth";
 
 @Module({
   imports: [
@@ -53,6 +54,7 @@ import { IssueTokenUseCase } from "./Application/Auth/issueToken.useCase";
       useClass: PassportAuthRepository
     },
     LocalStrategyPassportAuth,
+    JwtStrategyPassportAuth
   ],
 })
 export class AppModule {}

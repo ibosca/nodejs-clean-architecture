@@ -1,16 +1,19 @@
-import { Controller, Get, HttpException, HttpStatus, Param } from "@nestjs/common";
+import { Controller, Get, HttpException, HttpStatus, Request, UseGuards } from "@nestjs/common";
 import { GetPolicyByIdUseCase } from "../../../Application/Policy/getPolicyById.useCase";
 import { Policy } from "../../../Domain/policy";
 import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
+import { JwtAuthPassportGuard } from "../../Guard/Auth/jwt-auth.passport.guard";
 
 @Controller()
 export class GetPolicyByIdController {
 
   constructor(private getPolicyById: GetPolicyByIdUseCase) {}
 
+  @UseGuards(JwtAuthPassportGuard)
   @Get('policies/:policyId')
-  async getUserById(@Param() params): Promise<AppResponseDto> {
-    const policy = await this.getPolicyById.handle(params.policyId);
+  async getUserById(@Request() req): Promise<AppResponseDto> {
+    const policyId = req.params.policyId;
+    const policy = await this.getPolicyById.handle(policyId);
     return this.buildResponse(policy)
   }
 

@@ -1,15 +1,18 @@
-import { Controller, Get, HttpException, HttpStatus, Query } from "@nestjs/common";
+import { Controller, Get, HttpException, HttpStatus, Request, UseGuards } from "@nestjs/common";
 import { Client } from "../../../Domain/client";
 import { GetClientByNameUseCase } from "../../../Application/Client/getClientByName.useCase";
 import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
+import { JwtAuthPassportGuard } from "../../Guard/Auth/jwt-auth.passport.guard";
 
 @Controller()
 export class GetClientByNameController {
 
   constructor(private getClientByNameUseCase: GetClientByNameUseCase,) {}
 
+  @UseGuards(JwtAuthPassportGuard)
   @Get('/clients')
-  async getClientByUsername(@Query('name') clientName: string): Promise<AppResponseDto> {
+  async getClientByUsername(@Request() req): Promise<AppResponseDto> {
+    const clientName = req.query.name;
     this.guardValidateRequestData(clientName);
     const client = await this.getClientByNameUseCase.handle(clientName);
     return this.buildResponse(client);
