@@ -1,12 +1,12 @@
-import { Strategy } from 'passport-local';
+import { BasicStrategy } from 'passport-http';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ValidateUserByBasicAuthUseCase } from "../../Application/Auth/validateUserByBasicAuth.useCase";
 
 @Injectable()
-export class LocalStrategyPassportAuth extends PassportStrategy(Strategy) {
+export class BasicStrategyPassportAuth extends PassportStrategy(BasicStrategy) {
   constructor(private validateUserByBasicAuthUseCase: ValidateUserByBasicAuthUseCase) {
-    super({ usernameField: 'email' });
+    super();
   }
 
   async validate(username: string, password: string): Promise<any> {

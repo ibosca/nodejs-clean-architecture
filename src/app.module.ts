@@ -12,11 +12,11 @@ import { GetPolicyByIdController } from "./Infrastructure/Controller/Policy/getP
 import { GetClientByEmailUseCase } from "./Application/Client/getClientByEmail.useCase";
 import { ValidateUserByBasicAuthUseCase } from "./Application/Auth/validateUserByBasicAuth.useCase";
 import { BasicAuthController } from "./Infrastructure/Controller/Auth/basicAuth.controller";
-import { LocalStrategyPassportAuth } from "./Infrastructure/Auth/localStrategy.passport.auth";
 import { JwtModule } from "@nestjs/jwt";
 import { jwtConstants, PassportAuthRepository } from "./Infrastructure/Repository/Auth/passport.auth.repository";
 import { IssueTokenUseCase } from "./Application/Auth/issueToken.useCase";
 import { JwtStrategyPassportAuth } from "./Infrastructure/Auth/jwtStrategy.passport.auth";
+import { BasicStrategyPassportAuth } from "./Infrastructure/Auth/basicStrategy.passport.auth";
 
 @Module({
   imports: [
@@ -53,7 +53,7 @@ import { JwtStrategyPassportAuth } from "./Infrastructure/Auth/jwtStrategy.passp
       provide: 'AuthRepositoryInterface',
       useClass: PassportAuthRepository
     },
-    LocalStrategyPassportAuth,
+    BasicStrategyPassportAuth,
     JwtStrategyPassportAuth
   ],
 })
