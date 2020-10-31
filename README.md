@@ -5,7 +5,8 @@ Example implementation of a Clean Architecture on top of Nestjs framework.
 Key features:
 
 - Web Services integration
-- Restfull API definition // TODO: Swagger integration
+- Restfull API definition 
+- Swagger integration // Pending
 - Exception handling
 - Linter configuration
 - Authentication based on JWT Tokens
