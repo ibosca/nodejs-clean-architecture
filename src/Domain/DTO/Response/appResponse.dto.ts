@@ -13,6 +13,11 @@ export class AppResponseDto {
     return new AppResponseDto(meta, null);
   }
 
+  public static accessDenied(): AppResponseDto {
+    const meta = new MetadataDto(401, false, 'Access Denied');
+    return new AppResponseDto(meta, null);
+  }
+
   public static ok(data: any): AppResponseDto {
     const meta = new MetadataDto(200, true);
     return new AppResponseDto(meta, data);
