@@ -3,7 +3,9 @@ import { GetPolicyByIdUseCase } from "../../../Application/Policy/getPolicyById.
 import { Policy } from "../../../Domain/policy";
 import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
 import { JwtAuthPassportGuard } from "../../Guard/Auth/jwt-auth.passport.guard";
-import { ApiBearerAuth, ApiParam, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { NOT_FOUND_HTTP_CODE, NOT_FOUND_MESSAGE } from "../../../Domain/Error/notFound.appError";
+import { ACCESS_DENIED_HTTP_CODE, ACCESS_DENIED_MESSAGE } from "../../../Domain/Error/accessDenied.appError";
 
 @ApiTags('Policies')
 @Controller()
@@ -11,6 +13,9 @@ export class GetPolicyByIdController {
 
   constructor(private getPolicyById: GetPolicyByIdUseCase) {}
 
+  @ApiResponse({ status: 200, description: 'Return policy successfully'})
+  @ApiResponse({ status: NOT_FOUND_HTTP_CODE, description: NOT_FOUND_MESSAGE})
+  @ApiResponse({ status: ACCESS_DENIED_HTTP_CODE, description: ACCESS_DENIED_MESSAGE})
   @ApiBearerAuth()
   @ApiParam({
     name: 'policyId',
