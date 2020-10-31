@@ -3,13 +3,14 @@ import { GetPolicyByIdUseCase } from "../../../Application/Policy/getPolicyById.
 import { Policy } from "../../../Domain/policy";
 import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
 import { JwtAuthPassportGuard } from "../../Guard/Auth/jwt-auth.passport.guard";
-import { ApiParam } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiParam } from "@nestjs/swagger";
 
 @Controller()
 export class GetPolicyByIdController {
 
   constructor(private getPolicyById: GetPolicyByIdUseCase) {}
 
+  @ApiBearerAuth()
   @ApiParam({name: 'policyId', description: 'A policy Id', example: 'a0ece5db-cd14-4f21-812f-966633e7be86'})
   @UseGuards(JwtAuthPassportGuard)
   @Get('policies/:policyId')

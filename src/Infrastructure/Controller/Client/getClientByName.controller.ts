@@ -5,13 +5,14 @@ import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
 import { JwtAuthPassportGuard } from "../../Guard/Auth/jwt-auth.passport.guard";
 import { NotFoundAppError } from "../../../Domain/Error/notFound.appError";
 import { BadRequestAppError } from "../../../Domain/Error/badRequest.appError";
-import { ApiQuery } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiQuery } from "@nestjs/swagger";
 
 @Controller()
 export class GetClientByNameController {
 
   constructor(private getClientByNameUseCase: GetClientByNameUseCase,) {}
 
+  @ApiBearerAuth()
   @ApiQuery({ name: 'name', description: 'The name of the user', example: 'Britney' })
   @UseGuards(JwtAuthPassportGuard)
   @Get('/clients')
