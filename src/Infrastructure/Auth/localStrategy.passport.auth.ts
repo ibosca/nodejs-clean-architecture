@@ -2,7 +2,6 @@ import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ValidateUserByBasicAuthUseCase } from "../../Application/Auth/validateUserByBasicAuth.useCase";
-import { AppResponseDto } from "../../Domain/DTO/Response/appResponse.dto";
 
 @Injectable()
 export class LocalStrategyPassportAuth extends PassportStrategy(Strategy) {
@@ -14,7 +13,7 @@ export class LocalStrategyPassportAuth extends PassportStrategy(Strategy) {
     const user = await this.validateUserByBasicAuthUseCase.handle(username, password);
 
     if (!user) {
-      throw new UnauthorizedException(AppResponseDto.accessDenied());
+      throw new UnauthorizedException();
     }
 
     return user;
