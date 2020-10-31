@@ -15,8 +15,14 @@ export class GetClientByNameController {
     const clientName = req.query.name;
     const userLoggedId = req.user.id;
     this.guardValidateRequestData(clientName);
-    const client = await this.getClientByNameUseCase.handle(clientName, userLoggedId);
-    return this.buildResponse(client);
+
+    try {
+      const client = await this.getClientByNameUseCase.handle(clientName, userLoggedId);
+      return this.buildResponse(client);
+    } catch (error) {
+    throw new HttpException(AppResponseDto.accessDenied(), HttpStatus.UNAUTHORIZED);
+    }
+
   }
 
   private guardValidateRequestData(clientName: string): void {

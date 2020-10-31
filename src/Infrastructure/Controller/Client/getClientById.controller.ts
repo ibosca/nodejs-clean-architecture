@@ -14,8 +14,14 @@ export class GetClientByIdController {
   async getClientById(@Request() req): Promise<AppResponseDto> {
     const clientId = req.params.clientId;
     const userLoggedId = req.user.id;
-    const client = await this.getClientByIdUseCase.handle(clientId, userLoggedId);
-    return this.buildResponse(client);
+
+    try {
+      const client = await this.getClientByIdUseCase.handle(clientId, userLoggedId);
+      return this.buildResponse(client);
+    } catch (error) {
+      throw new HttpException(AppResponseDto.accessDenied(), HttpStatus.UNAUTHORIZED);
+    }
+
   }
 
   private buildResponse(client: Client): AppResponseDto {
