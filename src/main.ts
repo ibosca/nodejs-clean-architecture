@@ -17,6 +17,7 @@ async function bootstrap() {
     .addTag('Authentication')
     .addTag('Clients')
     .addTag('Policies')
+    .addBasicAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('apidoc', app, document);

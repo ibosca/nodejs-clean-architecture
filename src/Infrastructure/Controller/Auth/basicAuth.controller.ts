@@ -3,12 +3,14 @@ import { Client } from "../../../Domain/client";
 import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
 import { IssueTokenUseCase } from "../../../Application/Auth/issueToken.useCase";
 import { BasicAuthPassportGuard } from "../../Guard/Auth/basic-auth.passport.guard";
+import { ApiBasicAuth } from "@nestjs/swagger";
 
 @Controller()
 export class BasicAuthController {
 
   constructor(private issueToken: IssueTokenUseCase) {}
 
+  @ApiBasicAuth()
   @UseGuards(BasicAuthPassportGuard)
   @Post('auth')
   @HttpCode(201)
