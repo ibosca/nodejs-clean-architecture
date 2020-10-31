@@ -11,14 +11,18 @@ export class GetPolicyByIdController {
   constructor(private getPolicyById: GetPolicyByIdUseCase) {}
 
   @ApiBearerAuth()
-  @ApiParam({name: 'policyId', description: 'A policy Id', example: 'a0ece5db-cd14-4f21-812f-966633e7be86'})
+  @ApiParam({
+    name: 'policyId',
+    description: 'A policy Id',
+    example: 'a0ece5db-cd14-4f21-812f-966633e7be86'
+  })
   @UseGuards(JwtAuthPassportGuard)
   @Get('policies/:policyId')
   async getUserById(
     @Request() req,
-    @Param() policyId: string
+    @Param() params: any
   ): Promise<AppResponseDto> {
-    const policy = await this.getPolicyById.handle(policyId);
+    const policy = await this.getPolicyById.handle(params.policyId);
     return this.buildResponse(policy)
   }
 
