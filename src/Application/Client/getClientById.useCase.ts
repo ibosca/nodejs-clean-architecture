@@ -1,6 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { Client } from "../../Domain/client";
 import { ClientRepositoryInterface } from "../../Domain/Repository/Client/client.repository.interface";
+import { AccessDeniedAppError } from "../../Domain/Error/accessDenied.appError";
 
 @Injectable()
 export class GetClientByIdUseCase {
@@ -13,7 +14,7 @@ export class GetClientByIdUseCase {
     const userLogged = await this.clientRepository.getById(userLoggedId);
 
     if (!this.hasPermission(userLogged)) {
-      throw new AccessDeniedError();
+      throw new AccessDeniedAppError();
     }
 
     return await this.clientRepository.getById(clientId);

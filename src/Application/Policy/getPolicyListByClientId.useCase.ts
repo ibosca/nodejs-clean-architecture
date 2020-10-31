@@ -3,6 +3,8 @@ import { PolicyRepositoryInterface } from "../../Domain/Repository/Policy/policy
 import { Policy } from "../../Domain/policy";
 import { ClientRepositoryInterface } from "../../Domain/Repository/Client/client.repository.interface";
 import { Client } from "../../Domain/client";
+import { AccessDeniedAppError } from "../../Domain/Error/accessDenied.appError";
+import { NotFoundAppError } from "../../Domain/Error/notFound.appError";
 
 @Injectable()
 export class GetPolicyListByClientIdUseCase {
@@ -16,9 +18,13 @@ export class GetPolicyListByClientIdUseCase {
 
   public async handle(clientId: string, userLoggedId: string): Promise<Policy[]> {
     const userLogged = await this.clientRepository.getById(userLoggedId);
-
     if (!this.hasPermission(clientId, userLogged)) {
-      throw new AccessDeniedError();
+      throw new AccessDeniedAppError();
+    }
+
+    const client = await this.clientRepository.getById(clientId);
+    if (!client) {
+      throw new NotFoundAppError();
     }
 
     return await this.policyRepository.getListByClientId(clientId);
