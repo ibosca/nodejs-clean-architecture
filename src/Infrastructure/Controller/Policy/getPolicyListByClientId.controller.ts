@@ -15,7 +15,6 @@ export class GetPolicyListByClientIdController {
   constructor(private getPolicyListByClientId: GetPolicyListByClientIdUseCase) {}
 
   @ApiResponse({ status: 200, description: 'Return client successfully'})
-  @ApiResponse({ status: BAD_REQUEST_HTTP_CODE, description: BAD_REQUEST_MESSAGE})
   @ApiResponse({ status: NOT_FOUND_HTTP_CODE, description: NOT_FOUND_MESSAGE})
   @ApiResponse({ status: ACCESS_DENIED_HTTP_CODE, description: ACCESS_DENIED_MESSAGE})
   @ApiBearerAuth()

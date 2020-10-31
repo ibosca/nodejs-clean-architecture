@@ -20,7 +20,7 @@ export class GetPolicyByIdController {
   @ApiParam({
     name: 'policyId',
     description: 'A policy Id',
-    example: 'a0ece5db-cd14-4f21-812f-966633e7be86'
+    example: '64cceef9-3a01-49ae-a23b-3761b604800b'
   })
   @UseGuards(JwtAuthPassportGuard)
   @Get('policies/:policyId')
