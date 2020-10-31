@@ -19,7 +19,7 @@ We provide two options in order to set up the project:
 
 ### Using Docker
 
-### Manual installation
+### Manually
 
 ```
 $ npm i
