@@ -3,8 +3,9 @@ import { GetPolicyListByClientIdUseCase } from "../../../Application/Policy/getP
 import { Policy } from "../../../Domain/policy";
 import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
 import { JwtAuthPassportGuard } from "../../Guard/Auth/jwt-auth.passport.guard";
-import { ApiBearerAuth, ApiParam } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiParam, ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Policies')
 @Controller()
 export class GetPolicyListByClientIdController {
 

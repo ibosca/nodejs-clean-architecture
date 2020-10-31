@@ -4,8 +4,9 @@ import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
 import { Client } from "../../../Domain/client";
 import { JwtAuthPassportGuard } from "../../Guard/Auth/jwt-auth.passport.guard";
 import { NotFoundAppError } from "../../../Domain/Error/notFound.appError";
-import { ApiBearerAuth, ApiParam } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiParam, ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Clients')
 @Controller()
 export class GetClientByIdController {
 
