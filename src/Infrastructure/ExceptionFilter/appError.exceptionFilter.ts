@@ -4,6 +4,7 @@ import { AppResponseDto } from "../../Domain/DTO/Response/appResponse.dto";
 import { AppError } from "../../Domain/Error/appError";
 import { AccessDeniedAppError } from "../../Domain/Error/accessDenied.appError";
 import { NotFoundAppError } from "../../Domain/Error/notFound.appError";
+import { BadRequestAppError } from "../../Domain/Error/badRequest.appError";
 
 @Catch(AppError)
 export class AppErrorExceptionFilter implements ExceptionFilter {
@@ -20,6 +21,10 @@ export class AppErrorExceptionFilter implements ExceptionFilter {
 
     if (exception instanceof NotFoundAppError) {
       response.json(AppResponseDto.notFound());
+    }
+
+    if (exception instanceof BadRequestAppError) {
+      response.json(AppResponseDto.badRequest());
     }
 
   }

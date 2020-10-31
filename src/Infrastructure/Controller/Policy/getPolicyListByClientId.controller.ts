@@ -15,13 +15,8 @@ export class GetPolicyListByClientIdController {
 
     const clientId = req.params.clientId;
     const userLoggedId = req.user.id;
-
-    try {
-      const policyList = await this.getPolicyListByClientId.handle(clientId, userLoggedId);
-      return this.buildResponse(policyList)
-    } catch (error) {
-        throw new HttpException(AppResponseDto.accessDenied(), HttpStatus.UNAUTHORIZED);
-    }
+    const policyList = await this.getPolicyListByClientId.handle(clientId, userLoggedId);
+    return this.buildResponse(policyList)
 
   }
 

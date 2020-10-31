@@ -3,6 +3,7 @@ import { GetClientByIdUseCase } from "../../../Application/Client/getClientById.
 import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
 import { Client } from "../../../Domain/client";
 import { JwtAuthPassportGuard } from "../../Guard/Auth/jwt-auth.passport.guard";
+import { NotFoundAppError } from "../../../Domain/Error/notFound.appError";
 
 @Controller()
 export class GetClientByIdController {
@@ -14,20 +15,14 @@ export class GetClientByIdController {
   async getClientById(@Request() req): Promise<AppResponseDto> {
     const clientId = req.params.clientId;
     const userLoggedId = req.user.id;
-
-    try {
-      const client = await this.getClientByIdUseCase.handle(clientId, userLoggedId);
-      return this.buildResponse(client);
-    } catch (error) {
-      throw new HttpException(AppResponseDto.accessDenied(), HttpStatus.UNAUTHORIZED);
-    }
-
+    const client = await this.getClientByIdUseCase.handle(clientId, userLoggedId);
+    return this.buildResponse(client);
   }
 
   private buildResponse(client: Client): AppResponseDto {
 
     if (!client) {
-      throw new HttpException(AppResponseDto.notFound(), HttpStatus.NOT_FOUND);
+      throw new NotFoundAppError();
     }
 
     return AppResponseDto.ok(client.jsonSerialize());
