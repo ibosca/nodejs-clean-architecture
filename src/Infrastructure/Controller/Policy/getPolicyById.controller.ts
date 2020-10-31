@@ -23,7 +23,9 @@ export class GetPolicyByIdController {
       throw new HttpException(AppResponseDto.notFound(), HttpStatus.NOT_FOUND);
     }
 
-    return AppResponseDto.ok(policy.jsonSerialize());
+    return AppResponseDto.ok({
+      policy: policy.jsonSerialize()
+    });
 
   }
 

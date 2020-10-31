@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, HttpStatus, Request, UseGuards } from "@nestjs/common";
+import { Controller, Get, Request, UseGuards } from "@nestjs/common";
 import { GetClientByIdUseCase } from "../../../Application/Client/getClientById.useCase";
 import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
 import { Client } from "../../../Domain/client";
@@ -25,7 +25,9 @@ export class GetClientByIdController {
       throw new NotFoundAppError();
     }
 
-    return AppResponseDto.ok(client.jsonSerialize());
+    return AppResponseDto.ok({
+      client: client.jsonSerialize()
+    });
 
   }
 

@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, HttpStatus, Request, UseGuards } from "@nestjs/common";
+import { Controller, Get, Request, UseGuards } from "@nestjs/common";
 import { GetPolicyListByClientIdUseCase } from "../../../Application/Policy/getPolicyListByClientId.useCase";
 import { Policy } from "../../../Domain/policy";
 import { AppResponseDto } from "../../../Domain/DTO/Response/appResponse.dto";
@@ -21,7 +21,9 @@ export class GetPolicyListByClientIdController {
   }
 
   private buildResponse(policyList: Policy[]): AppResponseDto {
-    return AppResponseDto.ok(policyList.map((policy: Policy) => policy.jsonSerialize()));
+    return AppResponseDto.ok({
+      policies: policyList.map((policy: Policy) => policy.jsonSerialize())
+    });
   }
 
 }
