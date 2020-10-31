@@ -36,7 +36,7 @@ $ npm run start
 ### Get a taste
 Once the project is set up and running is time to get some data from it.
 
-The project comes with a `swagger` integration. Hit <localhost::3000/apidoc> to access it.
+The project comes with a `swagger` integration. Hit <http://localhost:3000/apidoc> to access it.
 
 1. Provide a valid username and password    
 
