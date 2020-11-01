@@ -12,7 +12,7 @@ Example implementation of a Clean Architecture on top of Nestjs framework.
 - 📖 Swagger integration
 - 💯 Testing // Pending
 - 🐋 Docker
-- Configuration based on ENV vars
+- ⚙️ Configuration based on ENV vars
 
 ## Installation
 
