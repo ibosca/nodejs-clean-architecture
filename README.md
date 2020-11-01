@@ -10,7 +10,7 @@ Example implementation of a Clean Architecture on top of Nestjs framework.
 - 💥 Exception handling
 - 🔍 Linter configuration
 - 📖 Swagger integration
-- 💯 Testing // Pending
+- 💯 Testing
 - 🐋 Docker
 - ⚙️ Configuration based on ENV vars
 
@@ -61,6 +61,16 @@ With this you're authorized to execute any of the requests on `Clients` and `Pol
 Have fun!
 
 ### Running tests
+
+Execute `test` command in order to run all tests:
+```
+$ npm test
+```
+
+**HINT**: In case you're running the app using Docker, run the command at container scope:    
+```
+$ docker exec -it axa-assessment_api_1 /bin/sh
+```
 
 
 ## Additional details
