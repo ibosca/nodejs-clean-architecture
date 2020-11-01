@@ -3,10 +3,6 @@ import { Injectable } from "@nestjs/common";
 import { AuthRepositoryInterface } from "../../../Domain/Repository/Auth/auth.repository.interface";
 import { JwtService } from "@nestjs/jwt";
 
-export const jwtConstants = {
-  secret: 'secretKey',
-};
-
 @Injectable()
 export class PassportAuthRepository implements AuthRepositoryInterface {
 

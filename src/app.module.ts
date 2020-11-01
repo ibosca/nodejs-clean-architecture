@@ -13,18 +13,24 @@ import { GetClientByEmailUseCase } from "./Application/Client/getClientByEmail.u
 import { ValidateUserByBasicAuthUseCase } from "./Application/Auth/validateUserByBasicAuth.useCase";
 import { BasicAuthController } from "./Infrastructure/Controller/Auth/basicAuth.controller";
 import { JwtModule } from "@nestjs/jwt";
-import { jwtConstants, PassportAuthRepository } from "./Infrastructure/Repository/Auth/passport.auth.repository";
+import { PassportAuthRepository } from "./Infrastructure/Repository/Auth/passport.auth.repository";
 import { IssueTokenUseCase } from "./Application/Auth/issueToken.useCase";
 import { JwtStrategyPassportAuth } from "./Infrastructure/Auth/jwtStrategy.passport.auth";
 import { BasicStrategyPassportAuth } from "./Infrastructure/Auth/basicStrategy.passport.auth";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 
 @Module({
   imports: [
     HttpModule,
-    JwtModule.register({
-      secret: jwtConstants.secret, //TODO: Extract to a ENV var
-      signOptions: { expiresIn: '3600s' },
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '3600s' },
+      }),
+      inject: [ConfigService],
     }),
+    ConfigModule.forRoot()
   ],
   controllers: [
     GetClientByIdController,
@@ -57,4 +63,6 @@ import { BasicStrategyPassportAuth } from "./Infrastructure/Auth/basicStrategy.p
     JwtStrategyPassportAuth
   ],
 })
-export class AppModule {}
+export class AppModule {
+  private configService: ConfigService
+}
