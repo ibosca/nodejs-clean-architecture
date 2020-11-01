@@ -21,7 +21,7 @@ We provide two options in order to set up the project:
 ### Using Docker
 Simply execute the following command: 
 ```
-$ docker-compose up -d
+$ docker-compose up
 ```
 
 ### Manually
