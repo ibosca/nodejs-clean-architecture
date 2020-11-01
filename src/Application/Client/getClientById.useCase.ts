@@ -2,6 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { Client } from "../../Domain/client";
 import { ClientRepositoryInterface } from "../../Domain/Repository/Client/client.repository.interface";
 import { AccessDeniedAppError } from "../../Domain/Error/accessDenied.appError";
+import { NotFoundAppError } from "../../Domain/Error/notFound.appError";
 
 @Injectable()
 export class GetClientByIdUseCase {
@@ -17,7 +18,13 @@ export class GetClientByIdUseCase {
       throw new AccessDeniedAppError();
     }
 
-    return await this.clientRepository.getById(clientId);
+    const client = await this.clientRepository.getById(clientId);
+
+    if (!client) {
+      throw new NotFoundAppError();
+    }
+
+    return client;
   }
 
   private hasPermission(userLogged: Client): boolean

@@ -26,19 +26,7 @@ export class GetClientByIdController {
   ): Promise<AppResponseDto> {
     const userLoggedId = req.user.id;
     const client = await this.getClientByIdUseCase.handle(params.clientId, userLoggedId);
-    return this.buildResponse(client);
-  }
-
-  private buildResponse(client: Client): AppResponseDto {
-
-    if (!client) {
-      throw new NotFoundAppError();
-    }
-
-    return AppResponseDto.ok({
-      client: client.jsonSerialize()
-    });
-
+    return AppResponseDto.ok({ client: client.jsonSerialize() });
   }
 
 }
