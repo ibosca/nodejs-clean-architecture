@@ -11,13 +11,18 @@ Key features:
 - Linter configuration
 - Swagger integration
 - Testing // Pending
-- Docker // Pending
+- Docker
+- Configuration based on ENV vars
 
 ## Installation
 
 We provide two options in order to set up the project:
 
 ### Using Docker
+Simply execute the following command: 
+```
+$ docker-compose up -d
+```
 
 ### Manually
 
@@ -55,7 +60,7 @@ The project comes with a `swagger` integration. Hit <http://localhost:3000/apido
 With this you're authorized to execute any of the requests on `Clients` and `Policies` sections.   
 Have fun!
 
-### Running the tests
+### Running tests
 
 
 ## Additional details
