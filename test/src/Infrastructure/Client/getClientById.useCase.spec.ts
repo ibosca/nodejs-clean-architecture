@@ -8,6 +8,10 @@ import { NotFoundAppError } from "../../../../src/Domain/Error/notFound.appError
 const sut = buildSubjectUnderTest();
 
 describe('GetClientById', () => {
+  beforeAll(() => {
+    jest.setTimeout(300000);
+  });
+
   it('should return a valid client when valid id provided', async function() {
 
     const validClientId = 'a0ece5db-cd14-4f21-812f-966633e7be86';

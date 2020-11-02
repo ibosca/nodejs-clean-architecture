@@ -29,6 +29,10 @@ export class GetClientByIdUseCase {
 
   private hasPermission(userLogged: Client): boolean
   {
+    if (!userLogged) {
+      return false;
+    }
+
     if (userLogged.isRoleUser()) {
       return true;
     }
