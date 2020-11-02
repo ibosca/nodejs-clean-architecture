@@ -7,7 +7,7 @@ import { NotFoundAppError } from "../../../../src/Domain/Error/notFound.appError
 
 const sut = buildSubjectUnderTest();
 
-describe('GetClientById', () => {
+describe('INTEGRATION: GetClientById', () => {
   beforeAll(() => {
     jest.setTimeout(300000);
   });

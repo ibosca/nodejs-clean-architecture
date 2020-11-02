@@ -1,11 +1,9 @@
 import { Test } from "@nestjs/testing";
-import { MockyClientRepository } from "../../../../src/Infrastructure/Repository/Client/mocky.client.repository";
 import { GetClientByIdUseCase } from "../../../../src/Application/Client/getClientById.useCase";
 import { ClientRepositoryInterface } from "../../../../src/Domain/Repository/Client/client.repository.interface";
 import { of } from "rxjs";
 import { ClientMother } from "../../Domain/client.mother";
 import { Client } from "../../../../src/Domain/client";
-import { HttpModule } from "@nestjs/common";
 import { AccessDeniedAppError } from "../../../../src/Domain/Error/accessDenied.appError";
 import { AppModule } from "../../../../src/app.module";
 
@@ -13,7 +11,7 @@ let getCientByIdUseCase: GetClientByIdUseCase;
 let clientRepositoryMock: ClientRepositoryInterface;
 let clientRepositorySpy;
 
-describe('GetClientById', () => {
+describe('UNIT: GetClientById', () => {
 
   beforeAll(async () => {
 

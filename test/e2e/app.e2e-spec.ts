@@ -21,4 +21,8 @@ describe('AppController (e2e)', () => {
       .auth('britneyblankenship@quotezart.com', 'I<3Pizza!')
       .expect(201)
   });
+
+  afterAll(async () => {
+    await app.close();
+  })
 });
