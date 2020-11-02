@@ -7,6 +7,7 @@ import { ClientMother } from "../../Domain/client.mother";
 import { Client } from "../../../../src/Domain/client";
 import { HttpModule } from "@nestjs/common";
 import { AccessDeniedAppError } from "../../../../src/Domain/Error/accessDenied.appError";
+import { AppModule } from "../../../../src/app.module";
 
 let getCientByIdUseCase: GetClientByIdUseCase;
 let clientRepositoryMock: ClientRepositoryInterface;
@@ -17,8 +18,7 @@ describe('GetClientById', () => {
   beforeAll(async () => {
 
     const moduleRef = await Test.createTestingModule({
-      providers: [GetClientByIdUseCase, { provide: 'ClientRepositoryInterface', useClass: MockyClientRepository }],
-      imports: [HttpModule]
+      imports: [AppModule],
     }).compile();
     getCientByIdUseCase = moduleRef.get<GetClientByIdUseCase>(GetClientByIdUseCase);
     clientRepositoryMock = moduleRef.get<ClientRepositoryInterface>('ClientRepositoryInterface');
@@ -42,7 +42,7 @@ describe('GetClientById', () => {
   it("should throw an exception when no valid client is returned",  function() {
     clientRepositorySpy = jest.spyOn(clientRepositoryMock, 'getById').mockClear().mockReturnValue(of(undefined).toPromise())
 
-    const invalidClientId = 'a0ece5db-cd14-4f21-812f-966633e7be86Z';
+    const invalidClientId = 'for sure this is not a valid client id';
 
     //Ensuring the flow is not going on if not valid client
     expect(async () =>  {

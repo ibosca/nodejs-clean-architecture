@@ -15,11 +15,10 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/auth (POST)', () => {
     return request(app.getHttpServer())
-      .get('/')
-      .expect(404)
-      // TODO: Return a valid AppResponse for no route found exception
-      .expect('{"statusCode":404,"message":"Cannot GET /","error":"Not Found"}');
+      .post('/auth')
+      .auth('britneyblankenship@quotezart.com', 'I<3Pizza!')
+      .expect(201)
   });
 });
