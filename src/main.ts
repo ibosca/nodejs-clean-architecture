@@ -3,12 +3,14 @@ import { AppModule } from './app.module';
 import { UnauthorizedExceptionFilter } from "./Infrastructure/ExceptionFilter/unauthorized.exceptionFilter";
 import { AppErrorExceptionFilter } from "./Infrastructure/ExceptionFilter/appError.exceptionFilter";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { NotFoundExceptionFilter } from "./Infrastructure/ExceptionFilter/notFound.exceptionFilter";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalFilters(new UnauthorizedExceptionFilter());
   app.useGlobalFilters(new AppErrorExceptionFilter());
+  app.useGlobalFilters(new NotFoundExceptionFilter());
 
   const options = new DocumentBuilder()
     .setTitle('NodeJs Clean Architecutre')
